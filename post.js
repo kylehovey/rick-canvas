@@ -6,22 +6,22 @@ const reqFor = (x, y, color = "#000000") => ({
   color,
 });
 
-const postToAggieCanvas = (requestData) => {
+const postToAggieCanvas = async (requestData) => {
   const url = "https://aggiecanvas.linux.usu.edu/api/update";
 
-  return fetch(url, {
+  const { ok } = await fetch(url, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(requestData),
-  }).then((response) => {
-    if (response.ok) {
-      console.log("POST request was successful.");
-    } else {
-      throw new Error("POST request failed");
-    }
   });
+
+  if (ok) {
+    console.log("POST request was successful.");
+  } else {
+    throw new Error("POST request failed");
+  }
 };
 
 // Checking the QR code is right
