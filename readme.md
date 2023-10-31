@@ -1,7 +1,5 @@
 # Rick Canvas
 
-![result_opt](https://github.com/kylehovey/rick-canvas/assets/7339800/260f9a22-f56e-4d2d-b953-bec44f0fd25a)
-
 This automates placing a RickRoll QR code on the [Aggie Canvas](https://aggiecanvas.linux.usu.edu/) using their REST API. I made this on a lunch break [using ChatGPT](https://chat.openai.com/share/7c1980d5-e891-4d28-95b3-3abb11861ca0) and by hacking together the plumbing, so the code is Not Great™. That being said, if you'd like to see how this was done, the pipeline was:
 
 ```mermaid
@@ -10,6 +8,10 @@ flowchart LR
     B --> C(Convert to JSON with PIL)
     C --> D(Post to API using JS script)
 ```
+
+## Result:
+
+![result_opt](https://github.com/kylehovey/rick-canvas/assets/7339800/260f9a22-f56e-4d2d-b953-bec44f0fd25a)
 
 ChatGPT wrote the Python PIL script to convert the image to JSON, I modified it to sample centers of squares instead of checking any pixel (it was getting the borders of regions and incorrectly converting), then once again used GPT to generate the code to properly call the API. The API shape was deduced from network information in Firefox inspector.
 
