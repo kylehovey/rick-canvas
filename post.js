@@ -6,7 +6,7 @@ const reqFor = (x, y, color = "#000000") => ({
   color,
 });
 
-function postToAggieCanvas(requestData) {
+const postToAggieCanvas = (requestData) => {
   const url = "https://aggiecanvas.linux.usu.edu/api/update";
 
   return fetch(url, {
@@ -22,7 +22,7 @@ function postToAggieCanvas(requestData) {
       throw new Error("POST request failed");
     }
   });
-}
+};
 
 // Checking the QR code is right
 console.log(
