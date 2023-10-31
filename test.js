@@ -29,28 +29,27 @@ function postToAggieCanvas(requestData) {
 // Call the function to send the POST request
 // postToAggieCanvas(reqFor(99, 99));
 
-// console.log(data.map(row => row.map(x => x === 1 ? '#' : ' ').join('')).join('\n'));
+console.log(data.map(row => row.map(x => x === 1 ? '#' : ' ').join('')).join('\n'));
 
 (async () => {
-  for (let row = 0; row < 25; row++) {
-    for (let col = 0; col < 25; col++) {
-      const setRow = 75 + row;
-      const setCol = 75 + col;
+  for (let row = 0; row < data.length; row++) {
+    for (let col = 0; col < data.length; col++) {
+      const setRow = (99 - data.length + 1) + row;
+      const setCol = (99 - data.length + 1) + col;
 
-      if (data[row][col] === 1) {
-        console.log(`Setting row ${row} and col ${col} to black. Progress: ${row * 25 + col}/625`);
-        let success = false;
-        while (! success) {
-          try {
-            await postToAggieCanvas(reqFor(setCol, setRow));
-            console.log('Success');
-            success = true;
-          } catch (e) {
-            console.log('Retrying...');
-            console.log(e);
-          }
-          await (() => new Promise(r => setTimeout(r, 2500)))();
+      const state = data[row][col] === 1 ? '#000000' : '#ffffff';
+      console.log(`Setting row ${row} and col ${col} to ${state}. Progress: ${row * 25 + col}/625`);
+      let success = false;
+      while (! success) {
+        try {
+          await postToAggieCanvas(reqFor(setCol, setRow, state));
+          console.log('Success');
+          success = true;
+        } catch (e) {
+          console.log('Retrying...');
+          console.log(e);
         }
+        await (() => new Promise(r => setTimeout(r, 2500)))();
       }
     }
   }

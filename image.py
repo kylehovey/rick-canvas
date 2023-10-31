@@ -7,14 +7,15 @@ image = Image.open("qr_code.png")
 # Convert the image to grayscale
 image = image.convert("L")
 
-# Define the size of the QR code (25x25)
-qr_code_size = 25
+# Define the size of the QR code (29x29)
+qr_code_size = 29
 
 # Initialize a 2D array to store the QR code data
 qr_code_data = [[0] * qr_code_size for _ in range(qr_code_size)]
 
 # Calculate the size of each QR code square in the 375x375 image
-square_size = image.width // qr_code_size
+# square_size = image.width // qr_code_size
+square_size = 13
 print(square_size)
 
 # Iterate through the QR code squares and check their color
